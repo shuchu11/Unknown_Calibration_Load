@@ -40,6 +40,7 @@ def solve_gamma(A, r):
     -------
     gamma : scalar complex or (K,) complex array.
     """
+    
     A = np.asarray(A, dtype=complex)
     r = np.asarray(r, dtype=float)
     a1, a2, a3 = A
