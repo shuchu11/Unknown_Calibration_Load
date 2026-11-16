@@ -62,7 +62,7 @@ def read_powers(gam):
     """Noisy power readings P1..P3 (normalized by PREF) for reflection gam."""
     gam = np.atleast_1d(gam)
     P = q[:, None] * np.abs(1.0 + A[:, None] * gam[None, :]) ** 2
-    P = P * 10 ** (rng.normal(0.0, SIGMA_DB, P.shape) / 10.0)
+    P = P * 10 ** (rng.normal(0.0, SIGMA_DB, P.shape) / 10.0)        # 加上功率雜訊
     return P
 
 
@@ -99,9 +99,9 @@ g_raw = solve_gamma(A_ideal, r_raw)
 
 fig, ax = plt.subplots(1, 2, figsize=(10, 4.6))
 sub = slice(0, len(D), 8)
-ax[0].plot(gam_p.real[sub], gam_p.imag[sub], lw=1)
-ax[0].set_title("ideal echo $\\Gamma'(D)$  (true spiral)")
-ax[1].plot(g_raw.real[sub], g_raw.imag[sub], lw=1, color="tab:red")
+ax[0].plot(gam_p.real[sub], gam_p.imag[sub], lw=1)    # 沒 gamma_0 ，僅加上振幅衰減，再轉回 Gamma
+ax[0].set_title("ideal echo $\\Gamma'(D)$  (true spiral)") 
+ax[1].plot(g_raw.real[sub], g_raw.imag[sub], lw=1, color="tab:red")  # 有 gamma_0 ，Gamma轉換成功率，搭配理想 A 再轉換回 Gamma
 ax[1].set_title("uncalibrated estimate (ideal-six-port assumption)")
 for a in ax:
     a.set_xlabel("Real"); a.set_ylabel("Imag"); a.axis("equal"); a.grid(alpha=.3)

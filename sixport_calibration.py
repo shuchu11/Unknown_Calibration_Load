@@ -1,3 +1,9 @@
+
+### 因為程式是直接假設 A_i 和 Gamma_1 是已知的，所以在測試時，會先用已知的 A_i 和 Gamma_1 來產生功率值 P，
+# 然後再用校正演算法來估計 A_i 和 Gamma_1，最後檢查估計值是否接近原本的已知值。
+### 現在我想改成從 csv 檔讀取 P 值，利用演算法做測試
+
+
 """
 Implementation of the six-port calibration algorithm from:
 
